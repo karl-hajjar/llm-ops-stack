@@ -16,4 +16,13 @@ transformers
 nltk
 Pillow
 langchain
+langchain_experimental
 langchain_openai
+langchain-mistralai
+text_generation
+huggingface_hub
+ipywidgets
+chromadb
+tiktoken
+Flask
+fastapi
