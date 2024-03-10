@@ -1,9 +1,5 @@
 import unittest
-import os
-import getpass
-from langchain.docstore.document import Document
-from langchain.vectorstores import FAISS
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain.memory import ConversationBufferMemory
 from langchain_community.chat_models import ChatOllama
@@ -13,7 +9,7 @@ from langchain_community.llms import Ollama
 from langchain_community.embeddings import OllamaEmbeddings
 
 
-class TestLAngChain(unittest.TestCase):
+class TestLangChain(unittest.TestCase):
     def setUp(self) -> None:
         pass
 
@@ -22,8 +18,8 @@ class TestLAngChain(unittest.TestCase):
         system_message = "Your are a helpful and harmless AI assistant."
         messages = [SystemMessage(content=system_message)]
         llm.invoke(messages)
-        result = llm.invoke([HumanMessage("What is the capital of France ?")])
-        result = llm.invoke([HumanMessage("Hi, what is 2+3 ?")])
+        result = llm.invoke("What is the capital of France ?")
+        result = llm.invoke("Hi, what is 2+3 ?")
         self.assertTrue(True)
 
     def test_llama2_small_llm(self):

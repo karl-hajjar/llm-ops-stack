@@ -1,13 +1,14 @@
 import os
 import click
-from flask import Flask, request
+from flask import Flask
 from datetime import datetime
+import json
+from collections import OrderedDict
 
 from app.language_model_api import LanguageModelAPI
 from utils.tools import set_up_logger, strp_datetime
 
 FILE_DIR = os.path.dirname(__file__)
-
 app = Flask(__name__)
 
 
@@ -20,27 +21,45 @@ app = Flask(__name__)
               help='Which LLM model to use')
 def run(host=None, port=None, llm_model_name="llama2"):
     run_dirname = strp_datetime(datetime.now())
-    run_dir = os.path.join(FILE_DIR, run_dirname)
+    run_dir = os.path.join(FILE_DIR, 'runs', run_dirname)
+    os.makedirs(run_dir, exist_ok=True)
+
     log_path = os.path.join(run_dir, "log.txt")
+    global logger
     logger = set_up_logger(path=log_path)
 
-    logger.info(f"Running LanguageModelAPI with host {host} on port {port}")
+    global lm_api
     lm_api = LanguageModelAPI(llm_model_name=llm_model_name)
+
+    logger.info(f"App launched, waiting for requests...")
+    logger.info(f"Parameters passed to the Flask app: host={host} on port={port}")
     app.run(host=host, port=port)
 
-    @app.route('/', methods=['GET'])
-    def handle_prompt():
-        query = request.args.get('query', type=str)
-        action = request.args.get('action', default="chat", type=str)
 
-        if action == "chat":
-            result = lm_api.llm(input=query)
-            return result
-        elif action == "embedding":
-            vector = lm_api.embedding_model(input=query)
-            return vector
-        else:
-            raise ValueError("`action` argument must be one of 'chat' or 'embedding'")
+@app.route('/', methods=['GET'])
+def hello():
+    return f"<h1>Hello, you are about to interact with the LLM {lm_api.llm_model_name} !</h1>"
+
+
+@app.route('/chat/<query>', methods=['GET'])
+def chat(query: str):
+    result = lm_api.llm(query).strip()
+    formatted_query = f"User query : {query}"
+    formatted_answer = f"Assistant answer : {result}"
+    logger.info(formatted_query)
+    logger.info(formatted_answer)
+    return_dict = OrderedDict({"User query": query.strip(),
+                               "Assistant answer": result})
+    return json.dumps(return_dict)
+
+
+@app.route('/embedding/<query>', methods=['GET'])
+def embed(query: str):
+    vector = lm_api.embedding_model.embed_query(query)
+    return_dict = OrderedDict({"query": query,
+                               "embedding_size": len(vector),
+                               "embedding": vector})
+    return json.dumps(return_dict)
 
 
 if __name__ == "__main__":

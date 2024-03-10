@@ -16,12 +16,10 @@ class LanguageModelAPI:
     * an llm attribute to deal with usual text queries
     * an embeddings model which can be used for document retrieval
     """
-    N_MAX_PROMPTS = 100
     SYSTEM_MESSAGE = "Your are a helpful and harmless AI assistant."
 
     def __init__(self, llm_model_name: str = "llama2"):
         self.llm_model_name = llm_model_name
-        self.prompts_queue = []
 
         self._set_llm()
         self._set_embeddings_model()
@@ -48,10 +46,6 @@ class LanguageModelAPI:
         :return:
         """
         self.embedding_model = OllamaEmbeddings(model=self.llm_model_name)
-
-    def update_prompts_queue(self, prompt: str):
-        if len(self.prompts_queue) < self.N_MAX_PROMPTS:
-            self.prompts_queue.append(prompt)
 
 
 
