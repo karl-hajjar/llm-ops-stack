@@ -20,6 +20,7 @@ notes.md
 *experiments*
 runs
 .neptune
+*.gguf
 
 # Logs
 logs
