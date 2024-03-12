@@ -1,7 +1,5 @@
 import os
 import logging
-import numpy as np
-import torch
 import yaml
 import pickle
 from datetime import datetime
@@ -27,20 +25,6 @@ def set_up_logger(path: str):
     logger.addHandler(stream_handler)
 
     return logger
-
-
-def set_random_seeds(seed=42):
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-
-    # if you are using GPU
-    if torch.cuda.is_available():
-        torch.cuda.manual_seed(seed)
-        torch.cuda.manual_seed_all(seed)
-
-    torch.backends.cudnn.enabled = False
-    torch.backends.cudnn.benchmark = False
-    torch.backends.cudnn.deterministic = True
 
 
 def read_yaml(path: str) -> dict:
