@@ -24,6 +24,7 @@ Finally download the Llama2-7b LLM from the HuggingFace hub:
 ```bash 
 huggingface-cli download TheBloke/Llama-2-7b-Chat-GGUF llama-2-7b-chat.Q4_K_M.gguf --local-dir . --local-dir-use-symlinks False
 ```
+(see [here](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF)).
 
 ## Running the Language Model API
 If Docker is already installed, simply run
