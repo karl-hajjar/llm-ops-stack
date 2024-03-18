@@ -17,7 +17,7 @@ Then create a virtual environment with all the necessary packages:
 ```bash
 python3 -m venv env
 source env/bin/activate
-pip instal -r requirements.txt
+pip install -r requirements.txt
 ```
 
 Finally download the Llama2-7b LLM from the HuggingFace hub:
