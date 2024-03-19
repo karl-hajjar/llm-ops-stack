@@ -19,6 +19,10 @@ python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
 ```
+If the latter `pip install` command fails with a CMAKE error, simply run 
+```bash
+pip install "huggingface-hub>=0.17.1"
+```
 
 Finally download the Llama2-7b LLM from the HuggingFace hub:
 ```bash 
