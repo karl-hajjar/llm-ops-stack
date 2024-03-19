@@ -26,8 +26,8 @@ huggingface-cli download TheBloke/Llama-2-7b-Chat-GGUF llama-2-7b-chat.Q4_K_M.gg
 ```
 (see [here](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF)).
 
-## Running the Language Model API
-If Docker is already installed, simply run
+## Running the Language Model API in a Docker container
+If Docker is already installed (otherwise, see [here](https://docs.docker.com/engine/install/)), launch it and simply run
 ```bash
 bash build_docker.sh
 ```
