@@ -13,7 +13,7 @@ Then go to the root directory `llm-ops-stack`of the repo:
 cd llm-ops-stack
 ```
 
-Then create a virtual environment with all the necessary packages:
+Then create a virtual environment with all the necessary packages. Run the following commands one by one sequentially:
 ```bash
 python3 -m venv env
 source env/bin/activate
