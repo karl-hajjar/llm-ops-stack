@@ -39,13 +39,15 @@ bash build_docker.sh
 This will take a while to copy all the necessary files and install all the necessary packages inside the docker 
 container. After the image is built and running, wait a little more for the API to load the LLM into memory (this can 
 take some time as well) and then finally go to the URL: [http://127.0.0.1:5000/](http://127.0.0.1:5000/) to see the 
-Language model API up and running. 
+Language model API up and running. The host or port might be different depending on your setup but modifying them
+accordingly should provide the correct results.
 
 To send requests to the API you can either directly modify the link to the URL as such:
 [http://127.0.0.1:5000/chat/What%20is%20the%20capital%20of%20England%3F](http://127.0.0.1:5000/chat/What%20is%20the%20capital%20of%20England%3F)
 or 
 [http://127.0.0.1:5000/embedding/What%20is%20the%20capital%20of%20England%3F](http://127.0.0.1:5000/embedding/What%20is%20the%20capital%20of%20England%3F).
-Otherwise you can use the script `send_example_requests.sh` to see the response to different requests.
+Otherwise you can use the script `send_example_requests.sh` located inside the code's root directory `llm-ops-stack`
+to see the response to different requests.
 
 
 
